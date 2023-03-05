@@ -1,4 +1,4 @@
-from utils.utils import get_data, get_filtered_data, get_last_data
+from utils.utils import get_data, get_filtered_data, get_last_data, get_formatted_data
 
 
 def main():
@@ -12,5 +12,7 @@ def main():
 
     data = get_filtered_data(data)  # var of filtered transactions
     data = get_last_data(data, COUNT_LAST_VALUES)  # address to get last 5 values
+    data = get_formatted_data(data)  # formatted data
+
 if __name__ == '__main__':
     main()

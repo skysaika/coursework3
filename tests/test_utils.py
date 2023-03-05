@@ -1,6 +1,6 @@
 import pytest
 
-from utils.utils import get_data
+from utils.utils import get_data, get_last_data
 
 
 def test_get_data():
@@ -15,3 +15,12 @@ def test_get_data():
     data, info = get_data(url_json)
     assert data is None  # test if Connection
     assert info == "ERROR: Ошибка соединения с сервером"
+
+
+def test_get_last_data(test_data):
+    """test get_last_data function"""
+    data = get_last_data(test_data, count_last_values=2)
+    assert data[0]['date'] == '2021-04-04T23:20:05.206878'
+    assert len(data) == 2
+
+

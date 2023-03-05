@@ -22,3 +22,11 @@ def get_last_data(data, count_last_values):
     """function sorted by date and get last data"""
     data = sorted(data, key=lambda x: x["date"], reverse=True)
     return data[:count_last_values]
+
+
+def get_formatted_data(data):
+    """function to get formatted data"""
+    formatted_data = []
+    for row in data:
+        print(row)
+        return
