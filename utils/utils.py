@@ -11,3 +11,14 @@ def get_data(url):
     except requests.exceptions.ConnectionError:
         return None, "ERROR: Ошибка соединения с сервером"
 
+
+def get_filtered_data(data):
+    """function to get filtered data"""
+    data = [x for x in data if "state" in x and x["state"] == 'EXECUTED']
+    return data
+
+
+def get_last_data(data, count_last_values):
+    """function sorted by date and get last data"""
+    data = sorted(data, key=lambda x: x["date"], reverse=True)
+    return data[:count_last_values]
