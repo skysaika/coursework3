@@ -1,6 +1,7 @@
 import pytest
 
-from utils.utils import get_data, get_last_data
+
+from utils.utils import get_data, get_last_data, get_formatted_data, get_filtered_data
 
 
 def test_get_data():
@@ -17,6 +18,13 @@ def test_get_data():
     assert info == "ERROR: Ошибка соединения с сервером"
 
 
+def test_get_filtered_data(test_data):
+    """test get_filtered_data function"""
+    assert len(get_filtered_data(test_data)) == 4  # test if filter correct
+    assert len(get_filtered_data(test_data, filtered_empty_from=True)) == 2
+
+
+
 def test_get_last_data(test_data):
     """test get_last_data function"""
     data = get_last_data(test_data, count_last_values=2)
@@ -24,3 +32,8 @@ def test_get_last_data(test_data):
     assert len(data) == 2
 
 
+def test_get_formatted_data(test_data):
+    data = get_formatted_data(test_data[:1])  # test if absolute match
+    assert data == ['26.08.2019 Перевод организации \nMaestro 1596 83 ** **** 5199  -> Счет **9589 \n31957.58 руб.\n']
+    data = get_formatted_data(test_data[3:4])  # test for absence "FROM"
+    assert data == ['23.03.2018 Открытие вклада \n[СКРЫТО]   -> Счет **2431 \n48223.05 руб.\n']

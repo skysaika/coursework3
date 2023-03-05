@@ -34,10 +34,14 @@ def get_formatted_data(data):
         date = datetime.strptime(row["date"], "%Y-%m-%dT%H:%M:%S.%f").strftime("%d.%m.%Y")
         description = row["description"]
 
-        sender = row["from"].split()
-        sender_bill = sender.pop(-1)  # separate bill from name card
-        sender_bill = f"{sender_bill[:4]} {sender_bill[4:6]} ** **** {sender_bill[-4:]}"
-        sender_info = " ".join(sender)  # join list to string
+        if "from" in row:
+            sender = row["from"].split()
+            sender_bill = sender.pop(-1)  # separate bill from name card
+            sender_bill = f"{sender_bill[:4]} {sender_bill[4:6]} ** **** {sender_bill[-4:]}"
+            sender_info = " ".join(sender)  # join list to string
+        else:
+            sender_info = "[СКРЫТО]"
+            sender_bill = ""
 
         recipient = f"**{row['to'][-4:]}"
         amount = f'{row["operationAmount"]["amount"]} {row["operationAmount"]["currency"]["name"]}'
